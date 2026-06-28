@@ -357,3 +357,116 @@ FROM segments
 GROUP BY purchase_freq_segment
 ORDER BY total_customers DESC
 
+--PROFIT MARGIN 2017 JAN-AUG VS 2018 JAN-AUG
+
+SELECT
+
+    ROUND(
+        (
+            SUM(
+                CASE
+                    WHEN EXTRACT(YEAR FROM o.order_purchase_timestamp) = 2017
+                     AND EXTRACT(MONTH FROM o.order_purchase_timestamp) <= 8
+                    THEN ot.net_profit
+                    ELSE 0
+                END
+            ) * 100.0
+        )
+        /
+        NULLIF(
+            SUM(
+                CASE
+                    WHEN EXTRACT(YEAR FROM o.order_purchase_timestamp) = 2017
+                     AND EXTRACT(MONTH FROM o.order_purchase_timestamp) <= 8
+                    THEN ot.gross_sales
+                    ELSE 0
+                END
+            ),
+            0
+        ),
+        1
+    ) AS profit_margin_2017_jan_aug,
+
+    ROUND(
+        (
+            SUM(
+                CASE
+                    WHEN EXTRACT(YEAR FROM o.order_purchase_timestamp) = 2018
+                     AND EXTRACT(MONTH FROM o.order_purchase_timestamp) <= 8
+                    THEN ot.net_profit
+                    ELSE 0
+                END
+            ) * 100.0
+        )
+        /
+        NULLIF(
+            SUM(
+                CASE
+                    WHEN EXTRACT(YEAR FROM o.order_purchase_timestamp) = 2018
+                     AND EXTRACT(MONTH FROM o.order_purchase_timestamp) <= 8
+                    THEN ot.gross_sales
+                    ELSE 0
+                END
+            ),
+            0
+        ),
+        1
+    ) AS profit_margin_2018_jan_aug
+
+FROM order_items_fact ot
+INNER JOIN orders_fact o
+    ON o.order_id = ot.order_id;
+
+--AOV 2017 JAN-AUG VS 2018 JAN-AUG
+
+SELECT
+
+    ROUND(
+        SUM(
+            CASE
+                WHEN EXTRACT(YEAR FROM o.order_purchase_timestamp) = 2017
+                 AND EXTRACT(MONTH FROM o.order_purchase_timestamp) <= 8
+                THEN ot.gross_sales
+                ELSE 0
+            END
+        )
+        /
+        NULLIF(
+            COUNT(
+                DISTINCT CASE
+                    WHEN EXTRACT(YEAR FROM o.order_purchase_timestamp) = 2017
+                     AND EXTRACT(MONTH FROM o.order_purchase_timestamp) <= 8
+                    THEN o.order_id
+                END
+            ),
+            0
+        ),
+        1
+    ) AS aov_2017_jan_aug,
+
+    ROUND(
+        SUM(
+            CASE
+                WHEN EXTRACT(YEAR FROM o.order_purchase_timestamp) = 2018
+                 AND EXTRACT(MONTH FROM o.order_purchase_timestamp) <= 8
+                THEN ot.gross_sales
+                ELSE 0
+            END
+        )
+        /
+        NULLIF(
+            COUNT(
+                DISTINCT CASE
+                    WHEN EXTRACT(YEAR FROM o.order_purchase_timestamp) = 2018
+                     AND EXTRACT(MONTH FROM o.order_purchase_timestamp) <= 8
+                    THEN o.order_id
+                END
+            ),
+            0
+        ),
+        1
+    ) AS aov_2018_jan_aug
+
+FROM orders_fact o
+INNER JOIN order_items_fact ot
+    ON ot.order_id = o.order_id;
