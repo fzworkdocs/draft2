@@ -2,7 +2,7 @@
 ### PostgreSQL + Python + Power BI Project 
 
 ## Project Overview
-This project provides an end-to-end data analysis of the Brazilian e-commerce market. While the business has experienced a significant surge in order volume and revenue growth, this expansion has not translated equally into profitability across all product categories. 
+This project provides an end-to-end data analysis of the Brazilian e-commerce market. While the business has experienced a significant surge in order volume and revenue growth, this expansion has not translated equally into profitability across all product categories and customer segments.
 
 The analysis focuses on diagnosing margin erosion, identifying logistics bottlenecks, evaluating customer retention cohorts, and uncovering data-driven opportunities to stabilize margins and drive sustainable growth.
 
