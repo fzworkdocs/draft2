@@ -1,5 +1,5 @@
 # Financial-Performance-And-Logistics-Optimization-Analysis
-### PostgreSQL + Python + Power BI Project 
+### PostgreSQL + Power BI Project
 
 ## Project Overview
 This project provides an end-to-end data analysis of the Brazilian e-commerce market. While the business has experienced a significant surge in order volume and revenue growth, this expansion has not translated equally into profitability across all product categories and customer segments.
@@ -61,7 +61,7 @@ Faiza
 
 > Note:
 
-> Analysis restricted to transactions from 2017 Jan-Aug. Data beyond this period is incomplete and excluded to ensure consistent YoY and MoM comparisons.
+> Analysis restricted to transactions from 2017 Jan-Aug to 2018 Jan-Aug. Data beyond this period is incomplete and excluded to ensure consistent YoY and MoM comparisons.
 
 > Due to file size, GitHub cannot preview the MS Word file. Please download the file to view the full report.
 

@@ -248,21 +248,6 @@ result_pct=pd.crosstab(
 
 print(result_pct.round(1))
 
-# %%WHICH PRODUCT CATEGORIES ARE BOUGHT MOST BY EACH CUSTOMER VALUE SEGMENT
-import pandas as pd
-from sqlalchemy import create_engine
-
-engine=create_engine(
-    "postgresql+psycopg2://postgres:faizasweety66@localhost:5432/project2"
-)
-
-query="""
-SELECT
-    macro_product_category_name,
-
-"""
-df=pd.read_sql(query,engine)
-
 # %% DOES HIGH FREIGHT COST % LEAD TO LOWER REVIEW SCORE
 
 import pandas as pd
@@ -413,7 +398,7 @@ GROUP BY
 
 df = pd.read_sql(query, engine)
 
-#Calculate Freight
+#Calculate Freight %
 df["freight_pct"] = (
     df["total_freight"] /
     df["gross_sales"]
